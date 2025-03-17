@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import {Routes, Route } from 'react-router-dom'
+import {Routes, Route, Navigate } from 'react-router-dom'
 import {Toaster} from 'react-hot-toast'
 
 import Home from './pages/Home'
@@ -11,7 +11,7 @@ import Login from './components/Login.jsx'
 import { AppContext } from './context/AppContext.jsx'
 
 const App = () => {
-  const {showLogin} = useContext(AppContext)
+  const {showLogin,user} = useContext(AppContext)
   return (
     <div className='px-4 sm:px-10 md:px-14 lg:px-28 min-h-screen bg-gradient-to-b from-red-100 to-orange-200'>
       <Toaster/>
@@ -20,7 +20,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/buy' element={<BuyCredit/>}/>
-        <Route path='/result' element={<Result/>}/>
+        <Route path='/result'   element={user ? <Result/> : <Navigate to="/" /> }  />
       </Routes>
       <Footer/>
       
